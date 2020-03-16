@@ -1,0 +1,19 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block title %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        Pagina niet gevonden
+    {% else %}
+        Login
+    {% endif %}
+{% endblock title %}
+
+{% block fos_user_content %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <div class="error">
+        {{ include('404_content.html.twig') }}
+    </div>
+{% else %}
+    {{ include('@FOSUser/Security/login_content.html.twig') }}
+{% endif %}
+{% endblock fos_user_content %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mijn Sollicitaties{% endblock %}
+
+{% block body %}
+<h1> Mijn Sollicitaties</h1>
+
+
+<table>
+<tr>
+    <th>Datum</th>
+    <th>Vacature</th>
+    <th>Bedrijf</th>
+    <th>Uitgenodigd</th>
+</tr>
+{% for vacature in vacatures %}
+    <tr class="">
+        <td> {{ vacature.getVacature.getDatum | date('d-m-Y') }}</td>
+        <td class=""> <a class="vacature_link" href="{{ path('detail', { 'id': vacature.getVacature.getId}) }}"> {{ vacature.getVacature.getTitel }} </a> </td>
+        <td> {{ vacature.getVacature.getBedrijf.getNaam }} </td>
+        <td class="text-center">
+            {% if vacature.getUitgenodigd %}
+            <i class="fas fa-check"></i>
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}
+</table>
+
+{% endblock body %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} VacIT Error {% endblock title %}
+{% block body %}
+    <div class="container error">
+        <h1>Oeps! Er is iets misgegaan</h1>
+        <h2>De server stuurde een "{{ status_code }} {{ status_text }}" terug.</h2>
+
+        <p>
+            Er is iest fout gegaan. Laat ons alstublieft weten wat u aan het doen was.
+            We zullen het zo snel mogelijk repareren. Excuses voor het ongemak.
+        </p>
+
+        <p> Klik <a href="{{path('home')}}">hier</a> om terug te gaan naar de hoofdpagina</p>
+    </div>
+{% endblock body %}

@@ -1,0 +1,92 @@
+body {
+    background-color: #F15A24;
+}
+
+#vacature-loop{
+    width: 360px;
+    height: 360px;
+}
+.vacature-loop-column{
+    align-self: center;
+}
+
+.text-loop {
+    position: absolute;
+    top: 80%;
+    left: 34%;
+    transform: rotate(-15deg);
+}
+
+#vacature-loop-titel{
+    font-size: 20px;
+    text-align: center;
+}
+
+#vacature-loop-bedrijf{
+    text-align: right;
+    font-size:15px;
+    display:inline-block;
+    position:absolute;
+    right: 0;
+}
+
+#vacature-loop-bedrijf, #vacature-loop-titel{
+    color: white;
+    background-color: black;
+    text-transform: uppercase;
+    border-radius: 4px;
+    padding: 3px;
+}
+
+.recent_vacature{
+    float:right;
+    padding:2px;
+    width:50%;
+}
+
+@media screen and (max-width: 768px){
+    .recent_vacature{
+        float:none;
+        width:0 !important;
+    }
+
+}
+.image {
+    width:inherit;
+    height:inherit;
+}
+
+.card{
+    display: block;
+    margin: 2%;
+    background: none;
+    border: none;
+}
+
+.content-row {
+    margin-right:0;
+}
+
+.description{
+    width: 85%;
+    height:3em;
+    overflow:hidden;
+}
+
+.card:hover .card-title, .card:hover .arrow {
+        opacity:1;
+}
+
+.arrow{
+    color: white;
+    opacity: 0.4;
+    font-size: 50px;
+    align-content: center;
+    display:inline-grid;
+    text-align: center;
+}
+
+.card-title {
+    color: white;
+    opacity: 0.4;
+}

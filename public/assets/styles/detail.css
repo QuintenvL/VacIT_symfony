@@ -1,0 +1,43 @@
+.soliciteer_div {
+    width: 20%;
+}
+
+.soliciteer_link {
+    font-size: 30px;
+    color: #F15A24;
+    font-weight: bold;
+}
+
+.soliciteer_link:hover{
+   text-decoration: none;
+   color: #F15A24;
+}
+
+#loading {
+    display:none;
+}
+
+.vacature_link {
+    color: #F15A24;
+}
+
+.vacature_link:hover {
+    color: #F15A24;
+    text-decoration: none;
+}
+
+td {
+    width: 15%;
+    padding: 2px;
+    padding-top: 3%;
+}
+td.vacature {
+    width: 30%;
+}
+tr.item {
+    border-bottom: 1px solid black;
+}
+
+.soort-icon {
+    width: 5%;
+}

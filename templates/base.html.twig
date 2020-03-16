@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>{% block title %}Welcome!{% endblock %}</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
+          integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+          crossorigin="anonymous">
+  <link rel="stylesheet" href="{{asset('assets/styles/main.css')}}">
+  {% block stylesheets %}{% endblock %}
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg text-white navbar-dark static-top">
+    <div class="container">
+      <a class="navbar-brand text-white" href={{ path('home') }}>VacIT</a>
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarResponsive"
+              aria-controls="navbarResponsive"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link text-white" href={{ path('home') }}>Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+              <li class="nav-item"> <a class="nav-link text-white" href="{{ path('mijn-vac') }}"> Mijn vacatures</a></li>
+              <li class="nav-item"> <a class="nav-link text-white">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} </a></li>
+              <li class="nav-item"><a class="nav-link text-white" href="{{ path('fos_user_security_logout') }}">
+                  {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+              </a></li>
+          {% else %}
+              <li class="nav-item">
+                <a class="nav-link text-white"
+                    href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}
+                </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link text-white"
+                      href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}
+                  </a>
+              </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+{% if app.request.hasPreviousSession %}
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="flash-{{ type }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+
+  <!-- Page Content -->
+{% block body %}{% endblock %}
+<!-- Footer -->
+<footer class="p-2">
+    <div class="row">
+        <div class="col-4 col-md-3 order-1 order-md-0 logo">
+            <img src="#" alt="logo"/>
+        </div>
+        <div class="col-8 col-md-4 order-0 order-md-1 footer-content">
+            <div class="col-sm">
+                <h4>Adres</h4>
+                <address>Lorem ipsum</address>
+            </div>
+            <div class="col-sm">
+                <h4>Privacy</h4>
+                <p>Lorem ipsum</p>
+            </div>
+        </div>
+    </div>
+</footer>
+{# <footer class="text-white"> #}
+    {# <div class="row"> #}
+        {# <div class="col-md-2 align-middle">Logo</div> #}
+        {# <div class=""> #}
+            {# <div class="col-md-4"> #}
+                {# <h4>Adres</h4> #}
+                {# <div>Lorem ipsum</div> #}
+            {# </div> #}
+            {# <div class="col-md-4"> #}
+                {# <h4>Privacy</h4> #}
+                {# <div>Lorem ipsum</div> #}
+            {# </div> #}
+        {# </div> #}
+        {# <div class="text-right fixed-bottom">&copy; 2020</div> #}
+    {# </div> #}
+{# </footer> #}
+
+<script src="https://kit.fontawesome.com/09606894c0.js" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  {% block javascripts %}{% endblock %}
+</body>
+
+</html>

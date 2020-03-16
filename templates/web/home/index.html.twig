@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('assets/styles/home.css')}}">
+<link rel="stylesheet" href="{{asset('assets/vegas/vegas.min.css')}}">
+{% endblock %}
+
+{% block title %}VacIT{% endblock %}
+
+{% block body %}
+<div class="px-2 py-5 main-container">
+<div class="row content-row">
+<div class="col-md d-flex justify-content-center vacature-loop-column">
+    <div class="vacature-loop"  id="vacature-loop">
+
+    </div>
+    <div class="text-loop">
+    <p id="vacature-loop-titel"></p>
+    <p id="vacature-loop-bedrijf"></P>
+    </div>
+</div>
+<div class="col-md">
+    {% for vacature in recents %}
+    <div class="card w-75">
+        <div class="row no-gutters">
+            <div class="col-2 mr-2">
+            <img class="image" src="{{asset('assets/icons/' ~ vacature.getSoort.getIcon)}}" alt="{{vacature.getSoort.getNaam}}"></img>
+            </div>
+            <div class="col-8">
+                <span>{{vacature.getDatum | date('j F Y')}}</span>
+                <h5 class="card-title">{{vacature.getTitel}}</h5>
+                <div class="description">{{vacature.getBeschrijving}}</div>
+            </div>
+            <div class="col-1 arrow">
+            <a class="" href="{{path('detail', { 'id': vacature.getId })}}">
+                <i class="arrow fas fa-arrow-right"></i>
+            </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script src="{{ asset('assets/vegas/vegas.min.js')}}"></script>
+<script src="{{ asset('assets/scripts/home.js') }}"></script>
+{% endblock %}

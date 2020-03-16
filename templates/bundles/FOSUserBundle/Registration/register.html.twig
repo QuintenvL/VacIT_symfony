@@ -1,0 +1,20 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% block title %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        Pagina niet gevonden
+    {% else %}
+        Registreren
+    {% endif %}
+{% endblock title %}
+
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="error">
+            {{ include('404_content.html.twig') }}
+        </div>
+    {% else %}
+        {% block fos_user_content %}
+        {% include "@FOSUser/Registration/register_content.html.twig" %}
+        {% endblock fos_user_content %}
+    {% endif %}
+{% endblock body %}

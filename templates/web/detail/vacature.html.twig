@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset('assets/styles/detail.css')}}">
+{% endblock %}
+
+{% block title %}{{ vacature.getTitel() }}{% endblock %}
+
+{% block body %}
+
+<div class="px-4 py-5 main-container">
+    <h1 class="text-center">{{ vacature.getTitel()}}</h1>
+
+    <img class="soort-icon" src="{{ asset('assets/icons/' ~ vacature.getSoort.getIcon)}}" alt="{{vacature.getSoort.getNaam}}"> </img>
+    <ul>
+        <li><span>Beschrijving:  </span>{{vacature.getBeschrijving()}}</li>
+        <li><span>Soort:  </span>{{vacature.getSoort().getNaam()}}</li>
+        <li><span>Niveau:  </span>{{vacature.getNiveau().getName()}}</li>
+        <li><span>Datum van toevoegen:  </span>{{vacature.getDatum() | date('d-m-Y')}}</li>
+        <li><span>Bedrijf:  </span>{{vacature.getBedrijf().getNaam()}}</li>
+    </ul>
+
+    {% if is_granted('ROLE_KANDIDAAT') and not is_granted('ROLE_BEDRIJF')%}
+        <div class="soliciteer_div">
+            {% if kanVac %}
+                <span class="soliciteer_link"> Gesolliciteerd</span>
+            {% else %}
+                <span id="userId" class="d-none" value="{{app.user.id}}"></span>
+                <span id="vacatureId" class="d-none" value="{{vacature.getId}}"></span>
+                <a class="soliciteer_link" href="">
+                    <i class="arrow fas fa-arrow-right"></i>
+                        <span>Soliciteer direct!</span>
+                </a>
+                <span id="loading"> Sollicitatie wordt opgestuurd...</span>
+            {% endif %}
+         </div>
+    {% endif %}
+
+    {# Tabel vacatures bedrijf #}
+    <h3> Meer vacatures van {{vacature.getBedrijf.getNaam}}</h3>
+    <table>
+    <tr>
+        <th>Datum</th>
+        <th>Vacature</th>
+        <th>Niveau</th>
+    </tr>
+    {% for bedrijf_vacature in vacature.getBedrijf.getVacatures %}
+        {% if bedrijf_vacature.getId != vacature.getId %}
+            <tr class="item">
+                <td> {{ bedrijf_vacature.getDatum | date('d-m-Y') }}</td>
+                <td class="vacature"> <a class="vacature_link" href="{{ path('detail', { 'id': bedrijf_vacature.getId}) }}"> {{ bedrijf_vacature.getTitel }} </a> </td>
+                <td> {{ bedrijf_vacature.getNiveau.getName }} </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+</div>
+
+{% endblock  body %}
+
+{% block javascripts %}
+
+<script src="{{ asset('assets/scripts/detail.js') }}"></script>
+{% endblock %}
